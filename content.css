@@ -1,0 +1,91 @@
+.quickfill-dropdown {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 2147483647; 
+  max-height: 280px; /* This controls when the menu becomes scrollable */
+  overflow-y: auto;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  min-width: 200px;
+  max-width: 350px; /* Prevents long previews from stretching the menu too wide */
+}
+
+/* Custom Scrollbar for a modern look */
+.quickfill-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+.quickfill-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 0 6px 6px 0;
+}
+.quickfill-dropdown::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+  border-radius: 4px;
+}
+.quickfill-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}
+
+.quickfill-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column; /* Stack title on top of text */
+  gap: 4px;
+}
+
+.quickfill-item:last-child {
+  border-bottom: none;
+}
+
+/* Title Styling */
+.quickfill-item-title {
+  font-weight: 600;
+  color: #202124;
+}
+
+/* Preview Text Styling */
+.quickfill-item-text {
+  font-size: 12px;
+  color: #777; /* Grey text so it doesn't compete with the title */
+  white-space: nowrap; /* Forces text to stay on one line */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds the '...' at the end */
+}
+
+/* Highlighted State Styling */
+.quickfill-item.selected, 
+.quickfill-item:hover {
+  background: #007bff;
+}
+
+.quickfill-item.selected .quickfill-item-title,
+.quickfill-item:hover .quickfill-item-title {
+  color: white;
+}
+
+/* Change preview text to a light blue/white when highlighted so it remains readable */
+.quickfill-item.selected .quickfill-item-text,
+.quickfill-item:hover .quickfill-item-text {
+  color: #cce5ff; 
+}
+
+.quickfill-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #202124;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  z-index: 2147483647;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
