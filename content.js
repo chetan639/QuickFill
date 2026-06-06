@@ -47,7 +47,8 @@ document.addEventListener('keydown', (e) => {
     if (keyBuffer.length > 5) keyBuffer = keyBuffer.slice(-5);
   }
 
-  if (keyBuffer.endsWith('//')) {
+  // UPDATED: Now triggers on double semicolon
+  if (keyBuffer.endsWith(';;')) {
     activeInput = document.activeElement;
     selectedIndex = 0;
     
@@ -79,17 +80,14 @@ function showDropdown() {
     item.className = 'quickfill-item';
     if (index === selectedIndex) item.classList.add('selected');
     
-    // Create the Title element
     const titleDiv = document.createElement('div');
     titleDiv.className = 'quickfill-item-title';
     titleDiv.textContent = snip.title;
     
-    // Create the Preview element
     const textDiv = document.createElement('div');
     textDiv.className = 'quickfill-item-text';
     textDiv.textContent = snip.text;
 
-    // Add them both to the main item container
     item.appendChild(titleDiv);
     item.appendChild(textDiv);
 
@@ -117,7 +115,6 @@ function updateHighlight() {
   items.forEach((item, index) => {
     if (index === selectedIndex) {
       item.classList.add('selected');
-      // The 'nearest' property is what keeps the scrolling smooth as you arrow down!
       item.scrollIntoView({ block: 'nearest' }); 
     } else {
       item.classList.remove('selected');
@@ -131,21 +128,44 @@ async function insertText(textToInsert) {
 
   if (isStandardInput) {
     const currentVal = activeInput.value;
-    const replacePos = currentVal.lastIndexOf('//');
+    // UPDATED: Looks for double semicolon to replace
+    const replacePos = currentVal.lastIndexOf(';;');
     if (replacePos !== -1) {
       activeInput.value = currentVal.slice(0, replacePos) + textToInsert + currentVal.slice(replacePos + 2);
     } else {
       activeInput.value += textToInsert;
     }
     activeInput.dispatchEvent(new Event('input', { bubbles: true }));
+    
   } else if (isRichText) {
+    activeInput.focus();
+
+    // Safely delete the ';;' trigger (2 backspaces)
     document.execCommand('delete', false);
     document.execCommand('delete', false);
-    document.execCommand('insertText', false, textToInsert);
+
+    let success = document.execCommand('insertText', false, textToInsert);
+
+    if (!success) {
+      try {
+        await navigator.clipboard.writeText(textToInsert);
+        document.execCommand('paste');
+      } catch (err) {
+        console.warn("Paste fallback failed");
+      }
+    }
+
+    activeInput.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+    activeInput.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+    activeInput.dispatchEvent(new Event('blur', { bubbles: true })); 
+    
+    activeInput.focus();
+
   } else {
     try {
       await navigator.clipboard.writeText(textToInsert);
-      showToast('Copied! Delete the "//" and press Paste (Ctrl+V).');
+      // UPDATED: Notification text matches the new shortcut
+      showToast('Copied! Delete the ";;" and press Paste (Ctrl+V).');
     } catch (err) {
       console.error('Failed to copy snippet: ', err);
     }
