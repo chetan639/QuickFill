@@ -1,10 +1,10 @@
 # QuickFill Snippets ⚡
 
-A lightweight, privacy-focused Chrome Extension that lets you autofill saved text snippets using a quick `//` shortcut. Built with Manifest V3, QuickFill keeps all your data strictly on your local machine and works across standard web forms and complex rich-text editors.
+A lightweight, privacy-focused Chrome Extension that lets you autofill saved text snippets using a quick `;;` shortcut. Built with Manifest V3, QuickFill keeps all your data strictly on your local machine and works across standard web forms and complex rich-text editors.
 
 ## ✨ Features
 
-* **Instant Trigger:** Type `//` in any text box to instantly open your snippet library.
+* **Instant Trigger:** Type `;;` in any text box to instantly open your snippet library.
 * **Keyboard Navigation:** Keep your hands on the keyboard. Cycle through snippets with the `Up` and `Down` arrow keys, and press `Enter` to inject the text.
 * **Smart UI:** Features a scrollable dropdown with snippet titles and a readable preview of the text, complete with custom scrollbars.
 * **Universal Support:** Works on standard `<input>` and `<textarea>` fields, as well as `contenteditable` rich-text editors (like Gmail and ChatGPT). 
@@ -25,7 +25,7 @@ Since this extension is not yet on the Chrome Web Store, you can install it loca
 ## 💻 How to Use
 
 1. **Add Snippets:** Click the QuickFill puzzle icon in your browser toolbar to open the management menu. Add a Title and the Text you want to save. You can also edit or delete existing snippets here.
-2. **Trigger the Menu:** Go to any webpage, click inside a text box, and type `//`.
+2. **Trigger the Menu:** Go to any webpage, click inside a text box, and type `;;`.
 3. **Select & Inject:** Use your arrow keys or mouse to highlight the snippet you want. Press `Enter` or click to inject it.
 4. **Cancel:** If the menu opens but you just want to type normally, just hit `Space` or continue typing and the menu will instantly disappear.
 
