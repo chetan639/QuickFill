@@ -1,10 +1,10 @@
 .quickfill-dropdown {
-  position: absolute !important;
+  position: fixed !important;
   background: white !important;
   border: 1px solid #ccc !important;
   border-radius: 6px !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-  z-index: 2147483647 !important; /* The maximum limit, forced to the front */
+  z-index: 2147483647 !important;
   max-height: 280px !important;
   overflow-y: auto !important;
   font-family: system-ui, sans-serif !important;
@@ -14,6 +14,7 @@
   margin: 0 !important;
   padding: 0 !important;
   text-align: left !important;
+  isolation: isolate !important;
 }
 
 /* Custom Scrollbar */
